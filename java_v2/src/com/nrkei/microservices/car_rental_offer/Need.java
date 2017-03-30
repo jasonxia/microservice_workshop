@@ -12,10 +12,12 @@ import java.util.HashMap;
 
 // Understands the requirement for advertising on a site
 public class Need {
+    private static int needId = 1;
+    private static int userId = 1000;
 
     public static void main(String[] args) {
-        String host = args[0];
-        String port = args[1];
+        String host = "localhost";
+        String port = "5672";
 
         final RapidsConnection rapidsConnection = new RabbitMqRapids("car_rental_need_java", host, port);
         publish(rapidsConnection);
@@ -37,6 +39,8 @@ public class Need {
     private static Packet needPacket() {
         HashMap<String, Object> jsonMap = new HashMap<>();
         jsonMap.put("need", "car_rental_offer");
+        jsonMap.put("user_id", "user_" + userId++);
+        jsonMap.put("need_id", "need_" + needId++);
         jsonMap.put("solutions", new String[0]);
         return new Packet(jsonMap);
     }

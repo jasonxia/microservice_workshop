@@ -15,8 +15,8 @@ import com.nrkei.microservices.rapids_rivers.rabbit_mq.RabbitMqRapids;
 public class Monitor implements River.PacketListener {
 
     public static void main(String[] args) {
-        String host = args[0];
-        String port = args[1];
+        String host = "localhost";
+        String port = "5672";
 
         final RapidsConnection rapidsConnection = new RabbitMqRapids("monitor_in_java", host, port);
         final River river = new River(rapidsConnection);
